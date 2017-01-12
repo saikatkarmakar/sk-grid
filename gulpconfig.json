@@ -1,0 +1,26 @@
+{
+  "sourcePath": "src/",
+  "releasePath": {
+    "root": "dist",
+    "js": "dist/js",
+    "css": "dist/css"
+  },
+  "sources": {
+    "templates": "src/templates/**/*.html",
+    "tpl": "src/templates.tpl"
+  },
+  "fileName": {
+    "js": "magnus-ng-grid.js",
+    "jsMin": "magnus-ng-grid.min.js",
+    "css": "magnus-ng-grid.css",
+    "cssMin": "magnus-ng-grid.min.css"
+  },
+  "files": {
+    "cssfiles": [
+      "src/**/*.css"
+    ],
+    "jsfiles": [
+      "src/**/*.js"
+    ]
+  }
+}

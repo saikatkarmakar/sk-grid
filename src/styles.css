@@ -1,0 +1,60 @@
+.mangnus-grid {
+    font-size: 12px;
+}
+
+.mangnus-grid .mangnus-grid-row .mangnus-grid-selection-cell{
+    float: left;
+    width: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mangnus-grid .mangnus-grid-row .mangnus-grid-cell{
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.mangnus-grid .mangnus-grid-row .mangnus-grid-cell:last-child{
+    border-right: 1px solid gray;
+}
+
+.mangnus-grid .mangnus-grid-row:last-child .mangnus-grid-cell {
+    border-bottom: 1px solid gray;
+}
+
+.mangnus-grid .magnus-grid-header-row{
+    background-color: #666;
+    color: #FFF;
+}
+
+.mangnus-grid .magnus-grid-data-row:nth-child(odd){
+    background-color: #EEE;
+}
+.mangnus-grid .magnus-grid-data-row.selected{
+    background-color: rgba(19, 197, 255, 0.21);
+}
+
+.mangnus-grid .magnus-grid-data-row .mangnus-grid-cell{
+    min-height: 20px;
+    max-height: 20px;
+    overflow: hidden;
+}
+
+.mangnus-grid .magnus-grid-data-row .mangnus-grid-cell div{
+    min-height: inherit;
+}
+.mangnus-grid .magnus-grid-data-row .mangnus-grid-cell .editable{
+    cursor: pointer;
+}
+
+.mangnus-grid .magnus-grid-data-row .mangnus-grid-cell input,
+.mangnus-grid .magnus-grid-data-row .mangnus-grid-cell select,
+.mangnus-grid .magnus-grid-data-row .mangnus-grid-cell textarea{
+    width: 100%;
+    border: none;
+    background-color: #ffff96;
+}
+
+

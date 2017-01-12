@@ -1,0 +1,22 @@
+<div class="container-fluid mangnus-grid">
+    <div class="row mangnus-grid-row magnus-grid-header-row">
+        <div class="mangnus-grid-cell mangnus-grid-selection-cell" ng-if="magnusGrid.selection">
+            <div class="{{header.headerCellClass}}">
+                <input style="vertical-align: text-bottom;" type="checkbox" ng-model="magnusGrid.$$selectAll" ng-click="selectAllRows()">
+            </div>
+        </div>
+        <div class="col-xs mangnus-grid-cell" ng-repeat="header in magnusGrid.$$columns">
+            <div class="{{header.headerCellClass}}">{{header.label}}</div>
+        </div>
+    </div>
+    <div class="row mangnus-grid-row magnus-grid-data-row {{row.$$selected?'selected':''}}" ng-repeat="(rowIdx, row) in magnusGrid.$$rows">
+        <div class="mangnus-grid-cell mangnus-grid-selection-cell" ng-if="magnusGrid.selection">
+            <input style="vertical-align: text-bottom;" ng-if="checkRowSelectable(row)" type="checkbox" ng-model="row.$$selected" ng-click="checkSelectAll()">
+        </div>
+        <div class="col-xs mangnus-grid-cell" ng-repeat="(colIdx, column) in magnusGrid.$$columns">
+            <div ng-if="checkCellDisplayCondition(rowIdx, colIdx)">
+                <div magnus-grid-cell column="column" row="row"></div>
+            </div>
+        </div>
+    </div>
+</div>
