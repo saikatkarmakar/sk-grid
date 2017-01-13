@@ -1,7 +1,7 @@
 /**
  * Created by karsa007 on 1/9/2017.
  */
-magnusNgGrid.factory('MagnusGridUtilityService', [function() {
+skGrid.factory('SKGridUtilityService', [function() {
     return {
         field: function(fld, obj){
             var index = function(obj,i) {

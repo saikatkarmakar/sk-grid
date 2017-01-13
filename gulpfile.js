@@ -48,7 +48,7 @@ gulp.task('markdown', function() {
     return gulp.src(config.sources.tpl)
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(htmltojson({
-            filename: "magnus-ng-grid-tpl",
+            filename: config.fileName.tpl,
             useAsVariable: true,
             isAngularTemplate: true
         }))

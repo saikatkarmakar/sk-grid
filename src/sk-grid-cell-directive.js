@@ -1,11 +1,11 @@
 /**
  * Created by karsa007 on 1/9/2017.
  */
-magnusNgGrid.directive('magnusGridCell', [
+skGrid.directive('skGridCell', [
     '$compile',
     '$sce',
-    'MagnusGridUtilityService',
-    function ($compile, $sce, MagnusGridUtilityService) {
+    'SKGridUtilityService',
+    function ($compile, $sce, SKGridUtilityService) {
         return {
             restrict: 'A',
             scope: {
@@ -19,27 +19,27 @@ magnusNgGrid.directive('magnusGridCell', [
                 scope.allowEditCell = function(){
                     if(scope.editable){
                         scope.editModeOn = true;
-                        scope.editValue = MagnusGridUtilityService.field(scope.column.field, scope.row);
+                        scope.editValue = SKGridUtilityService.field(scope.column.field, scope.row);
                     }
                 };
 
                 scope.saveValue = function(editValue){
-                    MagnusGridUtilityService.setField(scope.column.field, scope.row, editValue);
+                    SKGridUtilityService.setField(scope.column.field, scope.row, editValue);
                     console.log('Saved in object:', editValue);
                     scope.editModeOn = false;
                 };
 
                 scope.$watch('editModeOn', function(newVal){
                     if(newVal){
-                        scope.dynamicTemplateUrl = 'magnus-grid-cell-edit';
+                        scope.dynamicTemplateUrl = 'sk-grid-cell-edit';
                     }
                     else{
-                        scope.dynamicTemplateUrl = 'magnus-grid-cell-view';
+                        scope.dynamicTemplateUrl = 'sk-grid-cell-view';
                     }
                 });
 
                 scope.cellRenderer = function(column, row){
-                    var value = MagnusGridUtilityService.field(column.field, row);
+                    var value = SKGridUtilityService.field(column.field, row);
                     if(column.cellRenderer !== undefined){
                         if(typeof column.cellRenderer === "function"){
                             //TODO: should this value be returned as blank if it is null?

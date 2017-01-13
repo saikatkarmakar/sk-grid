@@ -1,29 +1,21 @@
 /**
  * Created by karsa007 on 12/30/2016.
  */
-magnusNgGrid.directive('magnusGrid', [
-    'MagnusGridUtilityService',
-    function (MagnusGridUtilityService) {
+skGrid.directive('skGrid', [
+    'SKGridUtilityService',
+    function (SKGridUtilityService) {
     return {
         restrict: 'A',
         scope: {
-            magnusGrid: "="
+            skGrid: "="
         },
-        templateUrl: function(element, attrs) {
-            var listType = attrs.listType ? attrs.listType : 'flat';
-            switch (listType){
-                case 'flat':
-                    return "magnus-grid-flat-list";
-                case 'group':
-                    return "magnus-grid-group-list";
-            }
-        },
+        templateUrl: "sk-grid",
         link: function(scope, elem, attr) {
-            scope.magnusGrid.$$columns = [];
-            scope.magnusGrid.$$rows = [];
-            scope.magnusGrid.$$oldData = angular.copy(scope.magnusGrid.data);
+            scope.skGrid.$$columns = [];
+            scope.skGrid.$$rows = [];
+            scope.skGrid.$$oldData = angular.copy(scope.skGrid.data);
             var sortables = [];
-            //angular.extend(scope.gridOptions, scope.magnusGrid);
+            //angular.extend(scope.gridOptions, scope.skGrid);
 
             //header setup
             var buildCols = function(cols){
@@ -35,7 +27,7 @@ magnusNgGrid.directive('magnusGrid', [
                         if(col.groupLevel != undefined){
                             sortables.push(col.field);
                         }
-                        scope.magnusGrid.$$columns.push(col);
+                        scope.skGrid.$$columns.push(col);
                     }
                 });
             };
@@ -46,7 +38,7 @@ magnusNgGrid.directive('magnusGrid', [
                     if(parent){
                         row.$$parent = parent;
                     }
-                    scope.magnusGrid.$$rows.push(row);
+                    scope.skGrid.$$rows.push(row);
                     angular.forEach(columns, function(col){
                         if(col.children && col.children.length > 0){
                             buildRows(row[col.field], col.children, row);
@@ -56,47 +48,47 @@ magnusNgGrid.directive('magnusGrid', [
             };
 
             var buildGrid = function(data){
-                scope.magnusGrid.$$columns = [];
-                scope.magnusGrid.$$rows = [];
-                buildCols(scope.magnusGrid.colDef);
+                scope.skGrid.$$columns = [];
+                scope.skGrid.$$rows = [];
+                buildCols(scope.skGrid.colDef);
                 data = _.sortBy(data, sortables);
-                buildRows(angular.copy(data), scope.magnusGrid.colDef, null);
+                buildRows(angular.copy(data), scope.skGrid.colDef, null);
             };
 
-            buildGrid(scope.magnusGrid.data);
+            buildGrid(scope.skGrid.data);
 
-            scope.magnusGrid.api = {
+            scope.skGrid.api = {
                 addRow: function(row, index){
                     if(index !== undefined && typeof index === "number"){
-                        scope.magnusGrid.data.splice(parseInt(index), 0, row);
+                        scope.skGrid.data.splice(parseInt(index), 0, row);
                     }
                     else{
-                        scope.magnusGrid.data.push(row);
+                        scope.skGrid.data.push(row);
                     }
-                    buildGrid(scope.magnusGrid.data);
+                    buildGrid(scope.skGrid.data);
                 },
                 addChildren: function(data, parent, index){
                     //TODO:consider n-th level children
                 },
                 getSelectedRows: function(){
-                    if(scope.magnusGrid.selection){
+                    if(scope.skGrid.selection){
 
                     }
                     else{
-                        throw {name : "MagnusGridSelectionNotEnabledError", message : "Selection option not enabled"};
+                        throw {name : "skGridSelectionNotEnabledError", message : "Selection option not enabled"};
                     }
                 }
             };
 
             scope.checkCellDisplayCondition = function(rowIdx, colIdx){
-                var row = scope.magnusGrid.$$rows[rowIdx];
-                var col = scope.magnusGrid.$$columns[colIdx];
+                var row = scope.skGrid.$$rows[rowIdx];
+                var col = scope.skGrid.$$columns[colIdx];
 
-                if(MagnusGridUtilityService.field(col.field, row) === undefined){
+                if(SKGridUtilityService.field(col.field, row) === undefined){
                     return false;
                 }
                 if(col.groupLevel != undefined){
-                    if(rowIdx > 0 && scope.magnusGrid.$$rows[rowIdx-1] && MagnusGridUtilityService.field(col.field, row) == MagnusGridUtilityService.field(col.field, scope.magnusGrid.$$rows[rowIdx-1])){
+                    if(rowIdx > 0 && scope.skGrid.$$rows[rowIdx-1] && SKGridUtilityService.field(col.field, row) == SKGridUtilityService.field(col.field, scope.skGrid.$$rows[rowIdx-1])){
                         return false;
                     }
                 }
@@ -104,40 +96,40 @@ magnusNgGrid.directive('magnusGrid', [
             };
 
             //selection
-            if(scope.magnusGrid.selection){
+            if(scope.skGrid.selection){
                 scope.checkSelectAll = function(rowIdx, row){
                     var selectedRowsCount = 0;
-                    angular.forEach(scope.magnusGrid.$$rows, function(r){
+                    angular.forEach(scope.skGrid.$$rows, function(r){
                         if(r.$$selected){
                             selectedRowsCount++;
                         }
                     });
 
-                    if(selectedRowsCount == scope.magnusGrid.$$rows.length){
-                        scope.magnusGrid.$$selectAll = true;
+                    if(selectedRowsCount == scope.skGrid.$$rows.length){
+                        scope.skGrid.$$selectAll = true;
                     }
                     else{
-                        scope.magnusGrid.$$selectAll = false;
+                        scope.skGrid.$$selectAll = false;
                     }
                 };
 
                 scope.selectAllRows = function(){
-                    if(scope.magnusGrid.$$selectAll){
-                        angular.forEach(scope.magnusGrid.$$rows, function(r){
+                    if(scope.skGrid.$$selectAll){
+                        angular.forEach(scope.skGrid.$$rows, function(r){
                             r.$$selected = true;
                         });
                     }
                     else{
-                        angular.forEach(scope.magnusGrid.$$rows, function(r){
+                        angular.forEach(scope.skGrid.$$rows, function(r){
                             r.$$selected = false;
                         });
                     }
                 };
 
-                scope.magnusGrid.selectChild = scope.magnusGrid.selectChild !== undefined ? scope.magnusGrid.selectChild : false;
+                scope.skGrid.selectChild = scope.skGrid.selectChild !== undefined ? scope.skGrid.selectChild : false;
 
                 scope.checkRowSelectable = function(row){
-                    if(row.$$parent && !scope.magnusGrid.selectChild){
+                    if(row.$$parent && !scope.skGrid.selectChild){
                         return false;
                     }
                     return true;
@@ -146,7 +138,7 @@ magnusNgGrid.directive('magnusGrid', [
 
             }
 
-            console.log(scope.magnusGrid);
+            console.log(scope.skGrid);
         }
     }
 }]);

@@ -1,7 +1,7 @@
 /**
  * Created by karsa007 on 12/30/2016.
  */
-var mainApp = angular.module('mainApp', ['magnusNgGrid']);
+var mainApp = angular.module('mainApp', ['skGrid']);
 mainApp.filter('test', function() {
     return function(value) {
         if (!value)

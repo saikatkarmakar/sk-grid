@@ -10,10 +10,11 @@
     "tpl": "src/templates.tpl"
   },
   "fileName": {
-    "js": "magnus-ng-grid.js",
-    "jsMin": "magnus-ng-grid.min.js",
-    "css": "magnus-ng-grid.css",
-    "cssMin": "magnus-ng-grid.min.css"
+    "tpl": "sk-grid-tpl",
+    "js": "sk-grid.js",
+    "jsMin": "sk-grid.min.js",
+    "css": "sk-grid.css",
+    "cssMin": "sk-grid.min.css"
   },
   "files": {
     "cssfiles": [
