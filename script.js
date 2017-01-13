@@ -62,7 +62,16 @@ mainApp.filter('test', function() {
                 field: "name",
                 headerCellClass: 'text-sm-center',
                 cellRenderer: function(value, row){
-                    return '<strong>'+$filter('test')(value)+'</strong><dir-test></dir-test>';
+                    return '<strong>'+$filter('test')(value)+'</strong>';
+                },
+                edit: true
+            },
+            {
+                label: "Directive",
+                field: "promoid",
+                headerCellClass: 'text-sm-center',
+                cellRenderer: function(value, row){
+                    return '<dir-test></dir-test>';
                 }
             },
             {

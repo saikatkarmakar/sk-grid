@@ -84,9 +84,9 @@ skGrid.directive('skGrid', [
                 var row = scope.skGrid.$$rows[rowIdx];
                 var col = scope.skGrid.$$columns[colIdx];
 
-                if(SKGridUtilityService.getCell(col.field)(row) === undefined){
+                /*if(SKGridUtilityService.getCell(col.field)(row) === undefined){
                     return false;
-                }
+                }*/
                 if(col.groupLevel != undefined){
                     if(rowIdx > 0 && scope.skGrid.$$rows[rowIdx-1] && SKGridUtilityService.getCell(col.field)(row) == SKGridUtilityService.getCell(col.field)(scope.skGrid.$$rows[rowIdx-1])){
                         return false;

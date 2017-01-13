@@ -19,32 +19,31 @@ skGrid.directive('skGridCell', [
                 scope.allowEditCell = function(){
                     if(scope.editable){
                         scope.editModeOn = true;
-                        scope.editValue = SKGridUtilityService.getCell(scope.column.field)(scope.row);
                     }
                 };
 
                 scope.saveValue = function(editValue){
                     SKGridUtilityService.setCell(scope.column.field)(scope.row, editValue);
-                    var field = SKGridUtilityService.getCell(scope.column.field)(scope.row);
-                    console.log('Saved in object:', editValue);
                     scope.editModeOn = false;
                 };
 
                 scope.$watch('editModeOn', function(newVal){
                     if(newVal){
+                        scope.editValue = SKGridUtilityService.getCell(scope.column.field)(scope.row);
                         scope.dynamicTemplateUrl = 'sk-grid-cell-edit';
                     }
                     else{
+                        delete scope.editValue;
                         scope.dynamicTemplateUrl = 'sk-grid-cell-view';
                     }
                 });
 
                 scope.cellRenderer = function(column, row){
-                    var value = SKGridUtilityService.getCell(column.field)(row);
+                    scope.value = SKGridUtilityService.getCell(column.field)(row);
                     if(column.cellRenderer !== undefined){
                         if(typeof column.cellRenderer === "function"){
                             //TODO: should this value be returned as blank if it is null?
-                            var html = column.cellRenderer(value ? value : '', row);
+                            var html = column.cellRenderer(scope.value, row);
                             var compiled = $compile(html)(scope);
                             var finalHtml = '';
                             angular.forEach(compiled, function(o){
@@ -54,7 +53,7 @@ skGrid.directive('skGridCell', [
                         }
                     }
                     else{
-                        return value ? $sce.trustAsHtml(value.toString()) : '';
+                        return scope.value ? $sce.trustAsHtml(scope.value.toString()) : '';
                     }
                 };
 

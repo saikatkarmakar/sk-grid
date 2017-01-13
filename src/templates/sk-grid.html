@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="col-xs sk-grid-cell" ng-repeat="header in skGrid.$$columns">
-            <div class="{{header.headerCellClass}}">{{header.label}}</div>
+            <div class="{{header.headerCellClass}} {{header.edit?'editable-column-identifier':''}}">{{header.label}}</div>
         </div>
     </div>
     <div class="row sk-grid-row sk-grid-data-row {{row.$$selected?'selected':''}}" ng-repeat="(rowIdx, row) in skGrid.$$rows">

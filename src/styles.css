@@ -28,6 +28,12 @@
     background-color: #666;
     color: #FFF;
 }
+.sk-grid .sk-grid-header-row .editable-column-identifier{
+    color: #ffff96;
+}
+.sk-grid .sk-grid-header-row .editable-column-identifier:after{
+    /*content: " *";*/
+}
 
 .sk-grid .sk-grid-data-row:nth-child(odd){
     background-color: #EEE;
