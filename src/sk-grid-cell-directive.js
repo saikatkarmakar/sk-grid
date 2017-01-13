@@ -19,12 +19,13 @@ skGrid.directive('skGridCell', [
                 scope.allowEditCell = function(){
                     if(scope.editable){
                         scope.editModeOn = true;
-                        scope.editValue = SKGridUtilityService.field(scope.column.field, scope.row);
+                        scope.editValue = SKGridUtilityService.getCell(scope.column.field)(scope.row);
                     }
                 };
 
                 scope.saveValue = function(editValue){
-                    SKGridUtilityService.setField(scope.column.field, scope.row, editValue);
+                    SKGridUtilityService.setCell(scope.column.field)(scope.row, editValue);
+                    var field = SKGridUtilityService.getCell(scope.column.field)(scope.row);
                     console.log('Saved in object:', editValue);
                     scope.editModeOn = false;
                 };
@@ -39,7 +40,7 @@ skGrid.directive('skGridCell', [
                 });
 
                 scope.cellRenderer = function(column, row){
-                    var value = SKGridUtilityService.field(column.field, row);
+                    var value = SKGridUtilityService.getCell(column.field)(row);
                     if(column.cellRenderer !== undefined){
                         if(typeof column.cellRenderer === "function"){
                             //TODO: should this value be returned as blank if it is null?

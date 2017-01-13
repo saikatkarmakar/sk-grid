@@ -75,7 +75,7 @@ skGrid.directive('skGrid', [
 
                     }
                     else{
-                        throw {name : "skGridSelectionNotEnabledError", message : "Selection option not enabled"};
+                        throw {name : "SKGridSelectionNotEnabledError", message : "Selection option not enabled"};
                     }
                 }
             };
@@ -84,11 +84,11 @@ skGrid.directive('skGrid', [
                 var row = scope.skGrid.$$rows[rowIdx];
                 var col = scope.skGrid.$$columns[colIdx];
 
-                if(SKGridUtilityService.field(col.field, row) === undefined){
+                if(SKGridUtilityService.getCell(col.field)(row) === undefined){
                     return false;
                 }
                 if(col.groupLevel != undefined){
-                    if(rowIdx > 0 && scope.skGrid.$$rows[rowIdx-1] && SKGridUtilityService.field(col.field, row) == SKGridUtilityService.field(col.field, scope.skGrid.$$rows[rowIdx-1])){
+                    if(rowIdx > 0 && scope.skGrid.$$rows[rowIdx-1] && SKGridUtilityService.getCell(col.field)(row) == SKGridUtilityService.getCell(col.field)(scope.skGrid.$$rows[rowIdx-1])){
                         return false;
                     }
                 }
@@ -134,8 +134,6 @@ skGrid.directive('skGrid', [
                     }
                     return true;
                 };
-
-
             }
 
             console.log(scope.skGrid);
